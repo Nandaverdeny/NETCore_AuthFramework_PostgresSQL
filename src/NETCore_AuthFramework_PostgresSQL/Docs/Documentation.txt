@@ -10,7 +10,7 @@ Database information :
 	Password : 123
 
 Admin account :
-	Email :  admin@framework.com
+	Email :  adminacc@framework.com
 	Password : P@ssw0rd
 
 Information :
