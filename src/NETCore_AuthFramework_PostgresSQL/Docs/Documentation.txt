@@ -13,5 +13,10 @@ Admin account :
 	Email :  admin@framework.com
 	Password : P@ssw0rd
 
+Information :
+	If database doesn't exist, run the application and create one user 
+	then application will show a page with a button (with name add migration or etc) to trigger the database migration (creating database)
+	try to refresh the screen if migration is done
+
 Reference website:
 	https://medium.com/@RobertKhou/asp-net-core-mvc-identity-using-postgresql-database-bc52255f67c4
