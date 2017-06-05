@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using NETCore_AuthFramework_PostgresSQL.Models;
 using NETCore_AuthFramework_PostgresSQL.Models.AccountViewModels;
 using NETCore_AuthFramework_PostgresSQL.Services;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using NETCore_AuthFramework_PostgresSQL.Data;
 
 namespace NETCore_AuthFramework_PostgresSQL.Controllers
 {
@@ -22,16 +24,20 @@ namespace NETCore_AuthFramework_PostgresSQL.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
@@ -57,9 +63,18 @@ namespace NETCore_AuthFramework_PostgresSQL.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                
+                ApplicationUser user;
+                user = await _userManager.FindByNameAsync(model.Email);
+
+                if (user == null)
+                {
+                    user = await _userManager.FindByEmailAsync(model.Email);
+                }
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");

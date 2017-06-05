@@ -9,5 +9,17 @@ namespace NETCore_AuthFramework_PostgresSQL.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {}
+
+        /// <summary>
+        /// Create a new Application User object.
+        /// </summary>
+        /// <param name="_applicationUserViewModel"></param>
+        public ApplicationUser (ApplicationUserViewModel _applicationUserViewModel)
+        {
+            UserName = _applicationUserViewModel.UserName;
+            Email = _applicationUserViewModel.Email;
+        }
     }
 }

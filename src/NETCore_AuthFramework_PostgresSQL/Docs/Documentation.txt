@@ -1,15 +1,16 @@
 ﻿Framework information :
-	Version : 1.0.0
+	Version : 1.1.0
 	Database : PostgresSQL
 
 Database information : 
 	Host : 192.168.1.99
 	Port : 5432
-	Database Name : AuthFramework
+	Database Name : AuthFrameworkDB
 	User : escurityuser
 	Password : 123
 
 Admin account :
+	UserName : adminFramework
 	Email :  adminacc@framework.com
 	Password : P@ssw0rd
 

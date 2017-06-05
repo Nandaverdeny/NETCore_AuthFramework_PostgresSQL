@@ -8,22 +8,22 @@ using NETCore_AuthFramework_PostgresSQL.Models;
 
 namespace NETCore_AuthFramework_PostgresSQL.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AuthFrameworkDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public AuthFrameworkDbContext(DbContextOptions<AuthFrameworkDbContext> options)
             : base(options)
         {
 
         }
 
-        //public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
+        public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //builder.Entity<ApplicationRole>().HasKey(m => m.Id);
 
-            //builder.Entity<ApplicationUserRole>().HasKey(m => m.UserId);
-            //builder.Entity<ApplicationUserRole>().HasKey(m => m.RoleId);
+            builder.Entity<ApplicationUserRole>().HasKey(m => m.UserId);
+            builder.Entity<ApplicationUserRole>().HasKey(m => m.RoleId);
 
 
             base.OnModelCreating(builder);
