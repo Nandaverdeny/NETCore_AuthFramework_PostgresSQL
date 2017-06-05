@@ -90,7 +90,7 @@ namespace NETCore_AuthFramework_PostgresSQL.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "User already have assigned to this role");
+                    ModelState.AddModelError("", "User already assigned to this role");
                 }   
          
             }
